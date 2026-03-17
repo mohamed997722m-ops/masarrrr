@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مسار | المساعد الأكاديمي</title>
+<meta name="theme-color" content="#0d9e6e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   MASAR v3 — Clean Green × Cream Design
+   ══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  /* Green palette */
+  --g900: #064e3b;
+  --g800: #065f46;
+  --g700: #047857;
+  --g600: #059669;
+  --g500: #0d9e6e;
+  --g400: #10b981;
+  --g300: #34d399;
+  --g200: #6ee7b7;
+  --g100: #a7f3d0;
+  --g50:  #d1fae5;
+
+  /* backgrounds */
+  --bg:      #f5f0e8;
+  --bg2:     #ede8df;
+  --card:    #fdfaf5;
+  --surface: #f8f4ed;
+
+  /* text */
+  --text:  #1a1a1a;
+  --text2: #4a5568;
+  --text3: #9ca3af;
+
+  /* borders */
+  --border:  #e5e0d5;
+  --border2: #d4cfc4;
+
+  /* accent */
+  --accent:     var(--g500);
+  --accent-s:   rgba(13,158,110,.12);
+  --accent-glow:rgba(13,158,110,.2);
+
+  /* semantic */
+  --red:    #dc2626;
+  --red-s:  rgba(220,38,38,.1);
+  --amber:  #d97706;
+  --amber-s:rgba(217,119,6,.1);
+  --teal:   #0891b2;
+  --teal-s: rgba(8,145,178,.1);
+
+  /* sidebar */
+  --sb-bg:   #ffffff;
+  --sb-w:    260px;
+
+  --f:'Cairo',sans-serif;
+  --r:14px; --r-sm:10px; --r-xs:6px;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+
+  --sh-sm: 0 1px 8px rgba(0,0,0,.06);
+  --sh-md: 0 4px 20px rgba(0,0,0,.09);
+  --sh-card:0 2px 12px rgba(0,0,0,.06);
+}
+
+/* Dark mode */
+body.dark {
+  --bg:      #111827;
+  --bg2:     #1f2937;
+  --card:    #1f2937;
+  --surface: #374151;
+  --text:    #f9fafb;
+  --text2:   #9ca3af;
+  --text3:   #4b5563;
+  --border:  #374151;
+  --border2: #4b5563;
+  --sb-bg:   #111827;
+  --sh-card: 0 2px 12px rgba(0,0,0,.3);
+}
+
+/* ── RESET ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--f);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  direction:rtl;
+  -webkit-font-smoothing:antialiased;
+  transition:background .3s,color .3s;
+}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
+
+/* ══ BRAND ══ */
+.brand-name{
+  font-weight:900;font-size:1.6rem;letter-spacing:2px;
+  color:var(--g500);
+  text-shadow:0 0 20px rgba(13,158,110,.15);
+}
+.road-icon{flex-shrink:0}
+.road-icon.lg{width:48px;height:38px}
+.road-icon.md{width:36px;height:28px}
+.road-icon.sm{width:28px;height:22px}
+
+/* ══ ONBOARDING ══ */
+.onboard-screen{
+  position:fixed;inset:0;z-index:1000;
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+}
+.ob-bg{
+  position:fixed;inset:0;
+  background:linear-gradient(135deg,#d1fae5 0%,#f5f0e8 40%,#fef3c7 100%);
+}
+body.dark .ob-bg{background:linear-gradient(135deg,#064e3b 0%,#111827 50%,#1f2937 100%)}
+
+.ob-box{
+  position:relative;z-index:1;
+  background:var(--card);
+  border-radius:24px;
+  padding:2.5rem 2rem;
+  width:100%;max-width:440px;
+  box-shadow:0 20px 60px rgba(0,0,0,.12);
+  border:1px solid var(--border);
+}
+.ob-logo{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:.4rem}
+.ob-tagline{text-align:center;color:var(--text2);font-size:.85rem;letter-spacing:2px;margin-bottom:2rem}
+
+.ob-step{display:none}
+.ob-step.active{display:block;animation:fadeUp .4s var(--spring)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.ob-step h2{font-size:1.5rem;font-weight:800;margin-bottom:.3rem}
+.ob-sub{color:var(--text2);font-size:.85rem;margin-bottom:1.2rem}
+.ob-nav{display:flex;gap:.75rem;margin-top:1.5rem}
+.ob-dots{display:flex;gap:7px;justify-content:center;margin-top:1.5rem}
+.od{width:7px;height:7px;border-radius:99px;background:var(--border2);cursor:pointer;transition:all .3s var(--spring)}
+.od.active{background:var(--accent);width:26px}
+
+/* ══ APP LAYOUT ══ */
+.app{display:flex;min-height:100vh}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sb-w);flex-shrink:0;
+  background:var(--sb-bg);
+  border-left:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:sticky;top:0;height:100vh;
+  overflow-y:auto;
+  transition:transform .3s var(--ease);
+  z-index:200;
+}
+.sb-top{flex:1;padding:1.5rem 1rem 1rem}
+.sb-brand{display:flex;align-items:center;gap:10px;margin-bottom:2rem;padding:.5rem .5rem}
+.sb-nav{display:flex;flex-direction:column;gap:3px}
+.sn{
+  display:flex;align-items:center;gap:12px;
+  padding:.75rem 1rem;border-radius:var(--r-sm);
+  color:var(--text2);cursor:pointer;
+  font-size:.92rem;font-weight:500;
+  transition:all .18s var(--ease);
+  text-decoration:none;
+}
+.sn svg{width:18px;height:18px;flex-shrink:0;transition:stroke .18s}
+.sn:hover{background:var(--accent-s);color:var(--accent)}
+.sn:hover svg{stroke:var(--accent)}
+.sn.active{
+  background:var(--g500);color:#fff;
+  font-weight:700;
+  box-shadow:0 3px 12px var(--accent-glow);
+}
+.sn.active svg{stroke:#fff}
+
+.sb-bottom{padding:1rem;border-top:1px solid var(--border)}
+.sb-user-card{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.75rem;border-radius:var(--r-sm);
+  cursor:pointer;transition:background .2s;
+  margin-bottom:.75rem;
+}
+.sb-user-card:hover{background:var(--surface)}
+.sb-av{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--g700),var(--g400));
+  color:#fff;font-weight:800;font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;overflow:hidden;
+}
+.sb-av img{width:100%;height:100%;object-fit:cover}
+.sb-uname{font-weight:700;font-size:.9rem}
+.sb-upts{font-size:.73rem;color:var(--text2);display:flex;align-items:center;gap:4px}
+.green-dot{width:6px;height:6px;border-radius:50%;background:var(--g400);display:inline-block}
+
+.sb-controls{display:flex;gap:.5rem;margin-bottom:.75rem}
+.ctrl-btn{
+  flex:1;height:34px;border-radius:var(--r-xs);
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--f);font-size:.78rem;font-weight:700;
+  transition:all .2s;
+}
+.ctrl-btn svg{width:15px;height:15px}
+.ctrl-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ctrl-btn.lang{letter-spacing:.5px}
+
+.sb-credit{text-align:center;padding:.5rem 0}
+.cr-love{font-size:.72rem;color:var(--text3);display:block}
+.cr-name{font-size:.78rem;font-weight:700;display:block;margin:.2rem 0}
+.cr-ig{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:.75rem;color:var(--accent);text-decoration:none;font-weight:600;
+}
+.cr-ig:hover{color:var(--g700)}
+
+/* sidebar overlay (mobile) */
+.sb-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.4);z-index:199;
+  backdrop-filter:blur(3px);
+}
+.sb-overlay.show{display:block}
+
+/* ── TOPBAR (mobile) ── */
+.topbar{
+  display:none;
+  position:sticky;top:0;z-index:100;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  padding:.65rem 1rem;
+  align-items:center;justify-content:space-between;
+  box-shadow:var(--sh-sm);
+}
+.tb-brand{display:flex;align-items:center;gap:8px}
+.hamburger{
+  display:flex;flex-direction:column;gap:4.5px;
+  background:none;border:none;cursor:pointer;padding:4px;
+}
+.hamburger span{display:block;width:20px;height:2px;background:var(--g500);border-radius:2px}
+.tb-av{
+  width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,var(--g700),var(--g400));
+  color:#fff;font-weight:800;font-size:.82rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;overflow:hidden;
+}
+.tb-av img{width:100%;height:100%;object-fit:cover}
+
+/* ── MAIN ── */
+.main{flex:1;overflow-y:auto;min-width:0}
+
+/* ── PAGES ── */
+.page{display:none;padding:1.5rem;max-width:1000px;margin:0 auto}
+.page.active{display:block;animation:fadeUp .3s var(--ease)}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem}
+.ph h2{font-size:1.5rem;font-weight:800}
+.ph-btns{display:flex;gap:.5rem}
+
+/* ══ HERO BANNER ══ */
+.hero{
+  background:linear-gradient(135deg,var(--g700) 0%,var(--g500) 50%,var(--g400) 100%);
+  border-radius:20px;
+  padding:1.8rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;margin-bottom:1.5rem;
+  position:relative;overflow:hidden;
+  box-shadow:0 8px 32px var(--accent-glow);
+  min-height:140px;
+}
+.hero::before{
+  content:'';position:absolute;
+  width:300px;height:300px;border-radius:50%;
+  top:-100px;left:-80px;
+  background:rgba(255,255,255,.06);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;
+  width:200px;height:200px;border-radius:50%;
+  bottom:-80px;right:10%;
+  background:rgba(255,255,255,.04);
+  pointer-events:none;
+}
+.hero-dt{
+  background:rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:.85rem 1.2rem;
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.2);
+  flex-shrink:0;
+}
+.hero-dayname{font-size:.78rem;color:rgba(255,255,255,.85);font-weight:600;margin-bottom:.2rem}
+.hero-clock{font-size:1.55rem;font-weight:900;color:#fff;letter-spacing:1px;line-height:1.1}
+.hero-hijri{font-size:.72rem;color:rgba(255,255,255,.7);margin-top:.3rem}
+.hero-msg{text-align:center;flex:1;position:relative;z-index:1}
+.hero-emoji{font-size:2.5rem;display:block;margin-bottom:.3rem;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hero-greet{font-size:2rem;font-weight:900;color:#fff;line-height:1.2}
+.hero-fac{font-size:.85rem;color:rgba(255,255,255,.8);margin-top:.3rem}
+
+/* ══ HOME GRID ══ */
+.home-grid{display:grid;grid-template-columns:280px 1fr;gap:1.25rem}
+.col-left{display:flex;flex-direction:column;gap:1.25rem}
+.col-right{display:flex;flex-direction:column;gap:0}
+
+/* ══ CARDS ══ */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:1.25rem;
+  box-shadow:var(--sh-card);
+}
+.card-ttl{font-weight:700;font-size:.95rem}
+.card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.card-lnk{
+  background:none;border:none;
+  color:var(--accent);font-family:var(--f);font-size:.8rem;font-weight:600;
+  cursor:pointer;transition:color .2s;padding:0;
+}
+.card-lnk:hover{color:var(--g700)}
+
+/* points card */
+.points-card{background:linear-gradient(135deg,#fefce8,#fef9c3);border-color:#fde68a}
+.pc-label{font-size:.85rem;font-weight:600;color:#92400e;margin-bottom:.4rem}
+.pc-num{font-size:2.5rem;font-weight:900;color:var(--accent);line-height:1}
+.pc-hint{font-size:.75rem;color:#78350f;margin-top:.5rem;line-height:1.5}
+
+/* prayer card */
+.prayer-card .card-ttl{margin-bottom:.9rem;display:block}
+.pr-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.5rem 0;border-bottom:1px solid var(--border);
+  font-size:.88rem;
+}
+.pr-row:last-child{border-bottom:none}
+.pr-name{font-weight:600;color:var(--text)}
+.pr-time{
+  font-size:.82rem;font-weight:600;
+  background:var(--accent-s);color:var(--accent);
+  padding:.2rem .7rem;border-radius:99px;
+}
+.pr-time.next{background:var(--accent);color:#fff}
+
+/* ══ LECTURE CARDS ══ */
+.lec-card{
+  display:flex;align-items:center;gap:.85rem;
+  padding:.85rem 1rem;
+  border-radius:var(--r-sm);
+  border:1px solid var(--border);
+  background:var(--card);
+  margin-bottom:.6rem;
+  transition:all .2s var(--ease);
+  box-shadow:var(--sh-sm);
+  position:relative;overflow:hidden;
+}
+.lec-card::before{
+  content:'';position:absolute;
+  top:0;right:0;bottom:0;width:4px;
+  background:var(--accent);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+}
+.lec-card:hover{transform:translateX(4px);box-shadow:var(--sh-md);border-color:var(--accent)}
+.lec-time-badge{
+  background:var(--accent-s);
+  border:1px solid rgba(13,158,110,.2);
+  border-radius:var(--r-xs);
+  padding:.35rem .65rem;
+  font-size:.8rem;font-weight:700;color:var(--accent);
+  white-space:nowrap;flex-shrink:0;
+  display:flex;align-items:center;gap:4px;
+}
+.lec-info{flex:1;min-width:0}
+.lec-subj{font-weight:700;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lec-meta{font-size:.76rem;color:var(--text2);margin-top:2px}
+.lec-del{
+  background:none;border:none;color:var(--text3);cursor:pointer;
+  padding:3px 6px;border-radius:var(--r-xs);transition:all .15s;
+  font-size:.85rem;opacity:0;
+}
+.lec-card:hover .lec-del{opacity:1}
+.lec-del:hover{color:var(--red);background:var(--red-s)}
+
+/* empty state */
+.empty-lec{
+  text-align:center;padding:2rem 1rem;
+  color:var(--text3);font-size:.88rem;
+}
+.empty-lec .ei{font-size:2.2rem;margin-bottom:.4rem}
+
+/* day tabs */
+.day-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.dt{
+  padding:.4rem .9rem;border-radius:99px;
+  border:1.5px solid var(--border2);
+  background:transparent;color:var(--text2);
+  font-family:var(--f);font-size:.82rem;font-weight:600;
+  cursor:pointer;transition:all .2s;
+}
+.dt:hover{border-color:var(--accent);color:var(--accent)}
+.dt.active{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 2px 10px var(--accent-glow)}
+
+.day-group{margin-bottom:1.25rem}
+.day-group-title{
+  font-size:.75rem;font-weight:700;color:var(--text2);
+  letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:.6rem;
+  display:flex;align-items:center;gap:8px;
+}
+.day-group-title::after{content:'';flex:1;height:1px;background:var(--border2)}
+
+/* ══ TASKS ══ */
+.task-filters{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.tf{
+  padding:.38rem .9rem;border-radius:99px;
+  border:1.5px solid var(--border2);
+  background:transparent;color:var(--text2);
+  font-family:var(--f);font-size:.8rem;font-weight:600;
+  cursor:pointer;transition:all .2s;
+}
+.tf:hover{border-color:var(--accent);color:var(--accent)}
+.tf.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tf.red.active{background:var(--red);border-color:var(--red)}
+
+.task-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r-sm);padding:.9rem 1rem;
+  display:flex;align-items:flex-start;gap:.75rem;
+  margin-bottom:.6rem;box-shadow:var(--sh-sm);
+  transition:all .2s var(--ease);position:relative;
+}
+.task-card::after{
+  content:'';position:absolute;top:0;right:0;bottom:0;width:3px;
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+}
+.task-card.high::after{background:var(--red)}
+.task-card.medium::after{background:var(--amber)}
+.task-card.low::after{background:var(--g400)}
+.task-card:hover{transform:translateX(4px);box-shadow:var(--sh-md)}
+.task-check{
+  width:21px;height:21px;min-width:21px;border-radius:6px;
+  border:2px solid var(--border2);cursor:pointer;margin-top:1px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .25s var(--spring);background:transparent;
+}
+.task-check:hover{border-color:var(--accent);background:var(--accent-s)}
+.task-check.done{background:var(--accent);border-color:var(--accent);box-shadow:0 2px 8px var(--accent-glow)}
+.task-check.done::after{content:'✓';color:#fff;font-size:.72rem;font-weight:900}
+.task-body{flex:1}
+.task-title{font-weight:700;font-size:.93rem}
+.task-card.task-done .task-title{text-decoration:line-through;color:var(--text3)}
+.task-meta{font-size:.76rem;color:var(--text2);margin-top:3px;display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+.prio-badge{font-size:.68rem;padding:2px 8px;border-radius:99px;font-weight:700}
+.prio-badge.high{background:var(--red-s);color:var(--red)}
+.prio-badge.medium{background:var(--amber-s);color:var(--amber)}
+.prio-badge.low{background:var(--accent-s);color:var(--accent)}
+.task-del{
+  background:none;border:none;color:var(--text3);cursor:pointer;
+  font-size:.8rem;padding:3px 6px;border-radius:var(--r-xs);
+  transition:all .15s;opacity:0;
+}
+.task-card:hover .task-del{opacity:1}
+.task-del:hover{color:var(--red);background:var(--red-s)}
+
+/* ══ LINKS ══ */
+.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.75rem}
+.link-card{
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:var(--r);padding:1.1rem .75rem;
+  text-align:center;text-decoration:none;color:var(--text);
+  display:block;transition:all .25s var(--spring);
+  box-shadow:var(--sh-sm);position:relative;overflow:hidden;
+}
+.link-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:var(--sh-md)}
+.link-icon{font-size:2rem;margin-bottom:.4rem;display:block;transition:transform .25s var(--spring)}
+.link-card:hover .link-icon{transform:scale(1.15)}
+.link-name{font-size:.8rem;font-weight:700}
+.lnk-del{
+  position:absolute;top:5px;left:5px;
+  background:var(--red-s);border:none;color:var(--red);
+  width:20px;height:20px;border-radius:50%;font-size:.7rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;opacity:0;transition:opacity .2s;
+}
+.link-card:hover .lnk-del{opacity:1}
+
+/* ══ PROFILE ══ */
+.pf-wrap{max-width:500px}
+.pf-av-sec{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.pf-big-av{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,var(--g700),var(--g400));
+  color:#fff;font-size:2rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;overflow:hidden;
+  box-shadow:0 4px 16px var(--accent-glow);
+  border:3px solid var(--g300);
+}
+.pf-big-av img{width:100%;height:100%;object-fit:cover}
+.pf-rows{margin-bottom:1.5rem}
+.pfr{display:flex;align-items:center;padding:.7rem 0;border-bottom:1px solid var(--border)}
+.pfl{font-size:.8rem;color:var(--text2);min-width:80px;font-weight:600}
+.pfr span:last-child{font-weight:500}
+.data-sec{margin-bottom:1.25rem}
+.sec-lbl{font-size:.78rem;font-weight:700;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-bottom:.65rem}
+.data-note{font-size:.74rem;color:var(--text2);margin-top:.5rem;padding:.4rem .7rem;background:var(--surface);border-radius:var(--r-xs);border:1px solid var(--border)}
+.dev-sec{padding-top:1.2rem}
+.dev-sep{height:1px;background:var(--border);margin-bottom:1rem}
+.dev-love{font-size:.72rem;color:var(--text3);display:block}
+.dev-name{font-size:.82rem;font-weight:700;display:block;margin:.25rem 0}
+.dev-ig{display:inline-flex;align-items:center;gap:5px;color:var(--accent);text-decoration:none;font-size:.8rem;font-weight:600;transition:color .2s}
+.dev-ig:hover{color:var(--g700)}
+
+/* ══ MODALS ══ */
+.mov{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.5);
+  z-index:2000;
+  display:none;align-items:flex-end;justify-content:center;
+  backdrop-filter:blur(6px);
+}
+.mov.open{display:flex}
+.modal{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px 20px 0 0;
+  width:100%;max-width:500px;
+  max-height:92dvh;overflow-y:auto;
+  animation:sheetUp .35s var(--spring);
+  box-shadow:0 -8px 40px rgba(0,0,0,.15);
+  position:relative;
+}
+.modal::before{
+  content:'';display:block;
+  width:38px;height:4px;border-radius:99px;
+  background:var(--border2);margin:10px auto 0;
+}
+.modal::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2.5px;
+  background:linear-gradient(90deg,transparent,var(--accent),var(--g300),transparent);
+  border-radius:20px 20px 0 0;
+}
+@keyframes sheetUp{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
+.mh{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.3rem .9rem;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--card);z-index:1;
+}
+.mh h3{font-size:1.05rem;font-weight:800}
+.mh button{
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text2);width:28px;height:28px;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:.88rem;transition:all .2s;
+}
+.mh button:hover{border-color:var(--accent);color:var(--accent)}
+.mb{padding:1.2rem 1.3rem}
+.mf{
+  display:flex;gap:.75rem;justify-content:flex-end;
+  padding:.95rem 1.3rem 1.4rem;
+  border-top:1px solid var(--border);
+}
+
+/* color picker */
+.cpick{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px}
+.cp{
+  width:28px;height:28px;border-radius:50%;cursor:pointer;
+  border:2.5px solid transparent;transition:all .25s var(--spring);
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+.cp:hover{transform:scale(1.2)}
+.cp.sel{border-color:#fff;box-shadow:0 0 0 2px var(--accent),0 2px 8px rgba(0,0,0,.2);transform:scale(1.1)}
+
+/* bulk tabs */
+.bulk-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.bt{
+  padding:.35rem .8rem;border-radius:99px;
+  border:1.5px solid var(--border2);background:transparent;
+  color:var(--text2);font-family:var(--f);font-size:.8rem;font-weight:600;
+  cursor:pointer;transition:all .2s;
+}
+.bt:hover{border-color:var(--accent);color:var(--accent)}
+.bt.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.bulk-row{
+  display:grid;grid-template-columns:1fr 1fr 70px 70px 28px;
+  gap:5px;margin-bottom:6px;align-items:center;
+}
+.bulk-row input{
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:var(--r-xs);padding:.48rem .65rem;
+  color:var(--text);font-family:var(--f);font-size:.8rem;
+  outline:none;width:100%;
+}
+.bulk-row input:focus{border-color:var(--accent)}
+.bulk-row input::placeholder{color:var(--text3);font-size:.75rem}
+.brd{
+  background:var(--red-s);border:none;color:var(--red);
+  width:28px;height:28px;border-radius:50%;cursor:pointer;
+  font-size:.8rem;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;flex-shrink:0;
+}
+.brd:hover{background:var(--red);color:#fff}
+
+/* avatar grid */
+.av-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem;margin-bottom:1rem}
+.av-opt{
+  aspect-ratio:1;border-radius:50%;
+  background:var(--surface);border:2.5px solid transparent;
+  font-size:1.8rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .22s var(--spring);
+}
+.av-opt:hover{transform:scale(1.12);border-color:var(--border2)}
+.av-opt.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--accent);transform:scale(1.1)}
+.av-upload{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  background:var(--surface);border:1.5px dashed var(--border2);
+  border-radius:var(--r-sm);padding:.75rem;
+  color:var(--text2);font-family:var(--f);font-size:.85rem;font-weight:600;
+  cursor:pointer;transition:all .2s;width:100%;
+}
+.av-upload:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ══ FORM ELEMENTS ══ */
+.fg{margin-bottom:1rem}
+.fg label{display:block;font-size:.76rem;font-weight:700;color:var(--text2);margin-bottom:.4rem;letter-spacing:.5px;text-transform:uppercase}
+.fg input,.fg select,.fg textarea{
+  width:100%;background:var(--surface);
+  border:1.5px solid var(--border);border-radius:var(--r-sm);
+  padding:.78rem 1rem;color:var(--text);
+  font-family:var(--f);font-size:.93rem;outline:none;
+  transition:all .2s var(--ease);
+}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--text3)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:var(--accent);background:var(--card);
+  box-shadow:0 0 0 3px var(--accent-s);
+}
+.fg textarea{resize:vertical;min-height:75px}
+select option{background:var(--card);color:var(--text)}
+
+/* autocomplete */
+.acw{position:relative}
+.acl{
+  position:absolute;top:calc(100% + 5px);right:0;left:0;
+  background:var(--card);border:1.5px solid var(--border2);
+  border-radius:var(--r-sm);max-height:210px;overflow-y:auto;
+  z-index:300;display:none;
+  box-shadow:var(--sh-md);
+}
+.acl.open{display:block;animation:fadeDown .18s var(--ease)}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.aci{
+  padding:.62rem 1rem;cursor:pointer;font-size:.9rem;
+  border-bottom:1px solid var(--border);transition:all .12s;
+}
+.aci:last-child{border-bottom:none}
+.aci:hover{background:var(--accent-s);color:var(--accent);padding-right:1.35rem}
+
+/* ══ BUTTONS ══ */
+.b-main{
+  padding:.75rem 1.4rem;
+  background:var(--accent);color:#fff;
+  border:none;border-radius:var(--r-sm);
+  font-family:var(--f);font-size:.92rem;font-weight:700;
+  cursor:pointer;transition:all .22s var(--spring);
+  box-shadow:0 3px 12px var(--accent-glow);
+}
+.b-main:hover{background:var(--g600);transform:translateY(-1px);box-shadow:0 6px 18px var(--accent-glow)}
+.b-main:active{transform:scale(.97)}
+.b-main.sm{padding:.5rem 1rem;font-size:.85rem}
+
+.b-ghost{
+  padding:.75rem 1.2rem;background:transparent;
+  color:var(--text2);border:1.5px solid var(--border2);
+  border-radius:var(--r-sm);font-family:var(--f);font-size:.88rem;
+  cursor:pointer;transition:all .2s;
+}
+.b-ghost:hover{color:var(--text);border-color:var(--accent);background:var(--accent-s)}
+
+.b-outline{
+  padding:.5rem 1rem;background:transparent;
+  color:var(--accent);border:1.5px solid rgba(13,158,110,.3);
+  border-radius:var(--r-sm);font-family:var(--f);font-size:.85rem;font-weight:600;
+  cursor:pointer;transition:all .2s;
+}
+.b-outline:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.b-outline.sm{padding:.4rem .85rem;font-size:.8rem}
+
+/* ══ TOAST ══ */
+.toast{
+  position:fixed;bottom:1.5rem;left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--g700);color:#fff;
+  border-radius:var(--r-sm);padding:.75rem 1.6rem;
+  font-size:.88rem;font-weight:600;
+  z-index:9999;max-width:320px;text-align:center;
+  opacity:0;visibility:hidden;
+  transition:all .3s var(--spring);
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
+.toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:768px){
+  .sidebar{
+    position:fixed;top:0;right:-100%;height:100%;
+    transition:right .3s var(--ease);
+    border-left:1px solid var(--border);
+  }
+  .sidebar.open{right:0}
+  .main{width:100%}
+  .topbar{display:flex}
+  .page{padding:1rem}
+  .home-grid{grid-template-columns:1fr}
+  .col-left{order:2}
+  .col-right{order:1}
+  .hero{flex-direction:column;text-align:center;padding:1.3rem}
+  .hero-dt{width:100%}
+  .hero-greet{font-size:1.5rem}
+}
+@media(min-width:769px){
+  .topbar{display:none}
+}
+
+</style>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwNjRlM2IiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwZDllNmUiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjNmVlN2I3Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMzRkMzk5Ii8+PC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSIxMTAiIGZpbGw9InVybCgjYmcpIi8+CiAgPHBhdGggZD0iTTgwIDQ1MCBMMTkwIDgwIEwzMjIgODAgTDQzMiA0NTAgWiIgZmlsbD0icmdiYSgxMTAsMjMxLDE4MywwLjE1KSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjE0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPGxpbmUgeDE9IjI1NiIgeTE9IjQzMCIgeDI9IjI1NiIgeTI9IjI5MCIgc3Ryb2tlPSIjNmVlN2I3IiBzdHJva2Utd2lkdGg9IjE4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8bGluZSB4MT0iMjU2IiB5MT0iMjUwIiB4Mj0iMjU2IiB5Mj0iMTUwIiBzdHJva2U9IiM2ZWU3YjciIHN0cm9rZS13aWR0aD0iMTQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4=">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwNjRlM2IiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwZDllNmUiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjNmVlN2I3Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMzRkMzk5Ii8+PC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSIxMTAiIGZpbGw9InVybCgjYmcpIi8+CiAgPHBhdGggZD0iTTgwIDQ1MCBMMTkwIDgwIEwzMjIgODAgTDQzMiA0NTAgWiIgZmlsbD0icmdiYSgxMTAsMjMxLDE4MywwLjE1KSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjE0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPGxpbmUgeDE9IjI1NiIgeTE9IjQzMCIgeDI9IjI1NiIgeTI9IjI5MCIgc3Ryb2tlPSIjNmVlN2I3IiBzdHJva2Utd2lkdGg9IjE4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8bGluZSB4MT0iMjU2IiB5MT0iMjUwIiB4Mj0iMjU2IiB5Mj0iMTUwIiBzdHJva2U9IiM2ZWU3YjciIHN0cm9rZS13aWR0aD0iMTQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4=">
+</head>
+<body>
+
+<!-- ══ ONBOARDING ══ -->
+<div id="onboarding" class="onboard-screen">
+  <div class="ob-bg"></div>
+  <div class="ob-box">
+    <div class="ob-logo">
+      <svg class="road-icon lg" viewBox="0 0 44 34" fill="none">
+        <path d="M3 32L14 4L30 4L41 32Z" fill="rgba(13,158,110,.2)" stroke="#0d9e6e" stroke-width="2.5" stroke-linejoin="round"/>
+        <line x1="22" y1="30" x2="22" y2="20" stroke="#22c55e" stroke-width="2.2" stroke-linecap="round"/>
+        <line x1="22" y1="16" x2="22" y2="9" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-name">مسار</span>
+    </div>
+    <p class="ob-tagline">المساعد الأكاديمي الذكي</p>
+    <div id="ob-steps">
+      <div class="ob-step active" id="obs-1">
+        <h2>ابدأ رحلتك</h2>
+        <div class="fg"><label>الاسم الكامل</label><input id="o-name" type="text" placeholder="محمد أحمد"></div>
+        <div class="fg"><label>السن</label><input id="o-age" type="number" placeholder="20" min="15" max="40"></div>
+        <div class="ob-nav">
+          <button class="b-ghost" onclick="skipOb()">تخطي</button>
+          <button class="b-main" onclick="obGo(2)">التالي ←</button>
+        </div>
+      </div>
+      <div class="ob-step" id="obs-2">
+        <h2>بياناتك الأكاديمية</h2>
+        <div class="fg"><label>الكلية</label>
+          <div class="acw"><input id="o-fac" type="text" placeholder="اكتب اسم الكلية..." autocomplete="off" oninput="acFac(this.value)" onfocus="acFac(this.value)"><div class="acl" id="fac-list"></div></div>
+        </div>
+        <div class="fg"><label>القسم</label>
+          <div class="acw"><input id="o-dept" type="text" placeholder="اكتب القسم..." autocomplete="off" oninput="acDept(this.value)" onfocus="acDept(this.value)"><div class="acl" id="dept-list"></div></div>
+        </div>
+        <div class="ob-nav">
+          <button class="b-ghost" onclick="obGo(1)">← رجوع</button>
+          <button class="b-main" onclick="obGo(3)">التالي ←</button>
+        </div>
+      </div>
+      <div class="ob-step" id="obs-3">
+        <h2>بيانات إضافية</h2>
+        <p class="ob-sub">اختيارية — يمكن تعبئتها لاحقاً</p>
+        <div class="fg"><label>رقم الهاتف</label><input id="o-phone" type="tel" placeholder="01xxxxxxxxx"></div>
+        <div class="fg"><label>العنوان</label><input id="o-addr" type="text" placeholder="محافظتك / مدينتك"></div>
+        <div class="ob-nav">
+          <button class="b-ghost" onclick="obGo(2)">← رجوع</button>
+          <button class="b-main" onclick="finishOb()">ابدأ مسار 🚀</button>
+        </div>
+      </div>
+    </div>
+    <div class="ob-dots">
+      <span class="od active" onclick="obGo(1)"></span>
+      <span class="od" onclick="obGo(2)"></span>
+      <span class="od" onclick="obGo(3)"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ APP ══ -->
+<div id="app" class="app" style="display:none">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-top">
+      <div class="sb-brand">
+        <svg class="road-icon md" viewBox="0 0 44 34" fill="none">
+          <path d="M3 32L14 4L30 4L41 32Z" fill="rgba(13,158,110,.2)" stroke="#0d9e6e" stroke-width="2.5" stroke-linejoin="round"/>
+          <line x1="22" y1="30" x2="22" y2="20" stroke="#22c55e" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="22" y1="16" x2="22" y2="9" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-name">مسار</span>
+      </div>
+      <nav class="sb-nav">
+        <a class="sn active" id="sn-home" onclick="gp('home')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9 21V12h6v9"/></svg>
+          الرئيسية
+        </a>
+        <a class="sn" id="sn-schedule" onclick="gp('schedule')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          الجدول
+        </a>
+        <a class="sn" id="sn-tasks" onclick="gp('tasks')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          المهام
+        </a>
+        <a class="sn" id="sn-links" onclick="gp('links')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+          الروابط السريعة
+        </a>
+        <a class="sn" id="sn-profile" onclick="gp('profile')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          الملف الشخصي
+        </a>
+      </nav>
+    </div>
+
+    <div class="sb-bottom">
+      <div class="sb-user-card" onclick="gp('profile')">
+        <div class="sb-av" id="sb-av">م</div>
+        <div class="sb-uinfo">
+          <div class="sb-uname" id="sb-uname">—</div>
+          <div class="sb-upts"><span class="green-dot"></span><span id="sb-pts">0</span> نقطة</div>
+        </div>
+      </div>
+      <div class="sb-controls">
+        <button class="ctrl-btn" onclick="toggleDark()" title="الوضع الليلي" id="dark-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </button>
+        <button class="ctrl-btn" onclick="toggleSilent()" id="silent-btn" title="الصوت">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </button>
+        <button class="ctrl-btn lang" onclick="toggleLang()" id="lang-btn">EN</button>
+      </div>
+      <div class="sb-credit">
+        <span class="cr-love">صُنع بحب ❤️</span>
+        <strong class="cr-name">محمد سعيد - مصمم التطبيق</strong>
+        <a href="https://www.instagram.com/mohamed_s_60?igsh=MWg3ZmxqeGE4ZGxwaA==" target="_blank" class="cr-ig">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @mohamed_s_60
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- SIDEBAR OVERLAY (mobile) -->
+  <div class="sb-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
+
+  <!-- MAIN -->
+  <main class="main">
+    <!-- mobile topbar -->
+    <div class="topbar">
+      <button class="hamburger" onclick="openSidebar()"><span></span><span></span><span></span></button>
+      <div class="tb-brand">
+        <svg class="road-icon sm" viewBox="0 0 44 34" fill="none">
+          <path d="M3 32L14 4L30 4L41 32Z" fill="rgba(13,158,110,.2)" stroke="#0d9e6e" stroke-width="2.5" stroke-linejoin="round"/>
+          <line x1="22" y1="30" x2="22" y2="20" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-name">مسار</span>
+      </div>
+      <div class="tb-av" id="tb-av" onclick="gp('profile')">م</div>
+    </div>
+
+    <!-- ─ HOME ─ -->
+    <div class="page active" id="pg-home">
+      <div class="hero">
+        <div class="hero-dt">
+          <div class="hero-dayname" id="h-day">الاثنين، ١٦ مارس ٢٠٢٦</div>
+          <div class="hero-clock" id="h-time">١٠:٠٤:٣٧ م</div>
+          <div class="hero-hijri" id="h-hijri">٢٧ رمضان ١٤٤٧ هـ</div>
+        </div>
+        <div class="hero-msg">
+          <span class="hero-emoji" id="h-emoji">☀️</span>
+          <h1 class="hero-greet" id="h-greet">صباح الخير!</h1>
+          <p class="hero-fac" id="h-fac"></p>
+        </div>
+      </div>
+
+      <div class="home-grid">
+        <div class="col-left">
+          <div class="card points-card">
+            <div class="pc-label">رصيد نقاطك</div>
+            <div class="pc-num" id="pc-num">0</div>
+            <div class="pc-hint">استمر في حضور المحاضرات وإنجاز المهام لزيادة نقاطك!</div>
+          </div>
+          <div class="card prayer-card">
+            <div class="card-ttl">🔔 مواقيت الصلاة</div>
+            <div id="prayer-rows"></div>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="card">
+            <div class="card-hdr">
+              <span class="card-ttl">📖 محاضرات اليوم</span>
+              <button class="card-lnk" onclick="gp('schedule')">الجدول كاملاً ‹</button>
+            </div>
+            <div id="home-lecs"></div>
+          </div>
+          <div class="card" style="margin-top:1rem">
+            <div class="card-hdr">
+              <span class="card-ttl">✅ مهام عاجلة</span>
+              <button class="card-lnk" onclick="gp('tasks')">كل المهام ‹</button>
+            </div>
+            <div id="home-tasks"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─ SCHEDULE ─ -->
+    <div class="page" id="pg-schedule">
+      <div class="ph">
+        <h2>الجدول الدراسي</h2>
+        <div class="ph-btns">
+          <button class="b-outline" onclick="openBulk()">📅 جدول كامل</button>
+          <button class="b-main sm" onclick="openML()">+ محاضرة</button>
+        </div>
+      </div>
+      <div class="day-tabs" id="day-tabs"></div>
+      <div id="lec-list"></div>
+    </div>
+
+    <!-- ─ TASKS ─ -->
+    <div class="page" id="pg-tasks">
+      <div class="ph">
+        <h2>المهام</h2>
+        <button class="b-main sm" onclick="openMT()">+ مهمة</button>
+      </div>
+      <div class="task-filters">
+        <button class="tf active" onclick="filterT('all',this)">الكل</button>
+        <button class="tf" onclick="filterT('pending',this)">قيد التنفيذ</button>
+        <button class="tf" onclick="filterT('done',this)">منتهية</button>
+        <button class="tf red" onclick="filterT('high',this)">عاجلة 🔴</button>
+      </div>
+      <div id="task-list"></div>
+    </div>
+
+    <!-- ─ LINKS ─ -->
+    <div class="page" id="pg-links">
+      <div class="ph">
+        <h2>الروابط السريعة</h2>
+        <button class="b-main sm" onclick="openMLnk()">+ رابط</button>
+      </div>
+      <div id="links-grid" class="links-grid"></div>
+    </div>
+
+    <!-- ─ PROFILE ─ -->
+    <div class="page" id="pg-profile">
+      <div class="ph"><h2>الملف الشخصي</h2><button class="b-outline" onclick="openEditProfile()">تعديل</button></div>
+      <div class="pf-wrap">
+        <div class="pf-av-sec">
+          <div class="pf-big-av" id="pf-av" onclick="openMAv()">م</div>
+          <button class="b-outline sm" onclick="openMAv()">تغيير الصورة</button>
+        </div>
+        <div class="pf-rows">
+          <div class="pfr"><span class="pfl">الاسم</span><span id="pf-name">—</span></div>
+          <div class="pfr"><span class="pfl">الكلية</span><span id="pf-fac">—</span></div>
+          <div class="pfr"><span class="pfl">القسم</span><span id="pf-dept">—</span></div>
+          <div class="pfr"><span class="pfl">السن</span><span id="pf-age">—</span></div>
+          <div class="pfr"><span class="pfl">الهاتف</span><span id="pf-phone">—</span></div>
+        </div>
+        <div class="data-sec">
+          <div class="sec-lbl">إدارة البيانات</div>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <button class="b-outline sm" onclick="exportData()">⬇ تصدير</button>
+            <label class="b-outline sm" style="cursor:pointer">⬆ استيراد<input type="file" accept=".json" style="display:none" onchange="importData(this.files[0])"></label>
+          </div>
+          <p class="data-note">📱 بياناتك محفوظة على جهازك فقط</p>
+        </div>
+        <div class="dev-sec">
+          <div class="dev-sep"></div>
+          <span class="dev-love">صُنع بحب ❤️</span>
+          <strong class="dev-name">محمد سعيد - مصمم التطبيق</strong>
+          <a href="https://www.instagram.com/mohamed_s_60?igsh=MWg3ZmxqeGE4ZGxwaA==" target="_blank" class="dev-ig">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            @mohamed_s_60
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ══ MODALS ══ -->
+<div class="mov" id="m-lec"><div class="modal">
+  <div class="mh"><h3>إضافة محاضرة</h3><button onclick="cm('m-lec')">✕</button></div>
+  <div class="mb">
+    <div class="fg"><label>اسم المادة</label><input id="l-subj" type="text" placeholder="رياضيات ٢"></div>
+    <div class="fg"><label>الدكتور</label><input id="l-doc" type="text" placeholder="د/ محمد أحمد"></div>
+    <div class="fg"><label>اليوم</label><select id="l-day"><option value="0">الأحد</option><option value="1">الاثنين</option><option value="2">الثلاثاء</option><option value="3">الأربعاء</option><option value="4">الخميس</option><option value="5">الجمعة</option><option value="6">السبت</option></select></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+      <div class="fg"><label>من</label><input id="l-from" type="time"></div>
+      <div class="fg"><label>إلى</label><input id="l-to" type="time"></div>
+    </div>
+    <div class="fg"><label>المكان</label><input id="l-place" type="text" placeholder="قاعة ٥"></div>
+    <div class="fg"><label>المبنى</label><input id="l-bldg" type="text" placeholder="مبنى أ"></div>
+    <div class="fg"><label>تذكير</label><select id="l-remind"><option value="">بدون</option><option value="60">قبل ساعة</option><option value="30">قبل ٣٠ د</option><option value="15">قبل ١٥ د</option></select></div>
+    <div class="fg"><label>اللون</label><div class="cpick" id="lc-pick">
+      <span class="cp sel" data-c="#0d9e6e" style="background:#0d9e6e"></span>
+      <span class="cp" data-c="#1a237e" style="background:#1a237e"></span>
+      <span class="cp" data-c="#7c4dff" style="background:#7c4dff"></span>
+      <span class="cp" data-c="#f57c00" style="background:#f57c00"></span>
+      <span class="cp" data-c="#c62828" style="background:#c62828"></span>
+      <span class="cp" data-c="#00838f" style="background:#00838f"></span>
+    </div></div>
+    <div class="fg"><label>ملاحظة</label><textarea id="l-note" placeholder="تفاصيل..."></textarea></div>
+  </div>
+  <div class="mf"><button class="b-ghost" onclick="cm('m-lec')">إلغاء</button><button class="b-main" onclick="saveLec()">حفظ</button></div>
+</div></div>
+
+<div class="mov" id="m-bulk"><div class="modal">
+  <div class="mh"><h3>📅 إضافة جدول كامل</h3><button onclick="cm('m-bulk')">✕</button></div>
+  <div class="mb">
+    <div class="bulk-tabs" id="bulk-tabs">
+      <button class="bt active" data-d="0" onclick="selBD(0)">الأحد</button>
+      <button class="bt" data-d="1" onclick="selBD(1)">الاثنين</button>
+      <button class="bt" data-d="2" onclick="selBD(2)">الثلاثاء</button>
+      <button class="bt" data-d="3" onclick="selBD(3)">الأربعاء</button>
+      <button class="bt" data-d="4" onclick="selBD(4)">الخميس</button>
+    </div>
+    <div id="bulk-rows"></div>
+    <button class="b-outline sm" style="width:100%;margin-top:.5rem" onclick="addBR()">+ محاضرة</button>
+  </div>
+  <div class="mf"><button class="b-ghost" onclick="cm('m-bulk')">إلغاء</button><button class="b-main" onclick="saveBulk()">💾 حفظ</button></div>
+</div></div>
+
+<div class="mov" id="m-task"><div class="modal">
+  <div class="mh"><h3>إضافة مهمة</h3><button onclick="cm('m-task')">✕</button></div>
+  <div class="mb">
+    <div class="fg"><label>عنوان المهمة</label><input id="t-title" type="text" placeholder="مذاكرة الفصل الثالث"></div>
+    <div class="fg"><label>المادة</label><input id="t-subj" type="text" placeholder="اسم المادة"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+      <div class="fg"><label>التاريخ</label><input id="t-date" type="date"></div>
+      <div class="fg"><label>الوقت</label><input id="t-time" type="time"></div>
+    </div>
+    <div class="fg"><label>الأولوية</label><select id="t-prio"><option value="high">عالية 🔴</option><option value="medium" selected>متوسطة 🟡</option><option value="low">منخفضة 🟢</option></select></div>
+    <div class="fg"><label>ملاحظة</label><textarea id="t-note" placeholder="تفاصيل..."></textarea></div>
+  </div>
+  <div class="mf"><button class="b-ghost" onclick="cm('m-task')">إلغاء</button><button class="b-main" onclick="saveTask()">حفظ</button></div>
+</div></div>
+
+<div class="mov" id="m-lnk"><div class="modal">
+  <div class="mh"><h3>إضافة رابط</h3><button onclick="cm('m-lnk')">✕</button></div>
+  <div class="mb">
+    <div class="fg"><label>الاسم</label><input id="lnk-name" type="text" placeholder="موقع الكلية"></div>
+    <div class="fg"><label>الرابط</label><input id="lnk-url" type="url" placeholder="https://..."></div>
+  </div>
+  <div class="mf"><button class="b-ghost" onclick="cm('m-lnk')">إلغاء</button><button class="b-main" onclick="saveLnk()">حفظ</button></div>
+</div></div>
+
+<div class="mov" id="m-av"><div class="modal">
+  <div class="mh"><h3>🎭 اختر صورتك</h3><button onclick="cm('m-av')">✕</button></div>
+  <div class="mb">
+    <div class="av-grid" id="av-grid"></div>
+    <label class="av-upload">📷 ارفع صورة<input type="file" accept="image/*" style="display:none" onchange="upAv(this)"></label>
+  </div>
+</div></div>
+
+<div class="mov" id="m-edit-profile"><div class="modal">
+  <div class="mh"><h3>تعديل الملف الشخصي</h3><button onclick="cm('m-edit-profile')">✕</button></div>
+  <div class="mb">
+    <div class="fg"><label>الاسم</label><input id="ep-name" type="text"></div>
+    <div class="fg"><label>الكلية</label><input id="ep-fac" type="text"></div>
+    <div class="fg"><label>القسم</label><input id="ep-dept" type="text"></div>
+    <div class="fg"><label>الهاتف</label><input id="ep-phone" type="tel"></div>
+  </div>
+  <div class="mf"><button class="b-ghost" onclick="cm('m-edit-profile')">إلغاء</button><button class="b-main" onclick="saveProfile()">حفظ</button></div>
+</div></div>
+
+<div id="toast" class="toast"></div>
+<script>
+/* ══════════════════════════════════════════════
+   MASAR v3 — Complete Application Logic
+   ══════════════════════════════════════════════ */
+
+// ── DATA ────────────────────────────────────────
+const FACULTIES = ['كلية الهندسة','كلية الطب البشري','كلية طب الأسنان','كلية الصيدلة','كلية العلوم','كلية الآداب','كلية التجارة','كلية الحقوق','كلية الزراعة','كلية التربية','كلية الطب البيطري','كلية الإعلام','كلية الفنون الجميلة','كلية الحاسبات والمعلومات','كلية الهندسة المعمارية','كلية التمريض','كلية العلوم التطبيقية','كلية اللغات والترجمة'];
+const DEPTS = {'كلية الهندسة':['هندسة مدنية','هندسة كهربائية','هندسة ميكانيكية','هندسة إلكترونيات','هندسة كيميائية','هندسة حاسبات'],'كلية الطب البشري':['طب عام','جراحة','باطنة','أطفال','نساء وتوليد','أشعة'],'كلية التجارة':['محاسبة','إدارة أعمال','اقتصاد','إحصاء','تجارة دولية'],'كلية الحاسبات والمعلومات':['علوم الحاسب','نظم المعلومات','شبكات','ذكاء اصطناعي'],'default':['القسم الأول','القسم الثاني','القسم الثالث']};
+const DAYS = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const AVATARS = ['🐱','🐭','🦁','🐺','🐻','🦊','🐯','🐼','🐸','🐧','🦉','🦅','🦋','🐬','🦄','🐲','🤖','👾','🧙','🧑‍🚀','👨‍💻','👩‍🔬','🧑‍🎨','👨‍🏫','🧑‍⚕️'];
+
+const PRAYER_NAMES_AR = {fajr:'الفجر',dhuhr:'الظهر',asr:'العصر',maghrib:'المغرب',isha:'العشاء'};
+let prayerTimes = {fajr:[4,30],dhuhr:[12,15],asr:[15,40],maghrib:[18,20],isha:[19,50]};
+
+// ── STATE ────────────────────────────────────────
+let user       = JSON.parse(localStorage.getItem('ms_user')||'null');
+let schedules  = JSON.parse(localStorage.getItem('ms_schedules')||'[]');
+let tasks      = JSON.parse(localStorage.getItem('ms_tasks')||'[]');
+let links      = JSON.parse(localStorage.getItem('ms_links')||'[]');
+let silentMode = localStorage.getItem('ms_silent')==='true';
+let isDark     = localStorage.getItem('ms_dark')==='true';
+let lang       = localStorage.getItem('ms_lang')||'ar';
+let selLecColor= '#0d9e6e';
+let bulkDay    = 0;
+let bulkRowN   = 0;
+let taskFilter = 'all';
+let selDay     = -1; // -1 = all days in schedule
+let points     = parseInt(localStorage.getItem('ms_points')||'0');
+let selAvatar  = localStorage.getItem('ms_avatar')||'';
+
+// ── SAVE ────────────────────────────────────────
+function save(){
+  localStorage.setItem('ms_user',JSON.stringify(user));
+  localStorage.setItem('ms_schedules',JSON.stringify(schedules));
+  localStorage.setItem('ms_tasks',JSON.stringify(tasks));
+  localStorage.setItem('ms_links',JSON.stringify(links));
+  localStorage.setItem('ms_points',points);
+}
+
+// ── INIT ────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  applyDark(); applyLang();
+  if(user){ launchApp(); }
+  else { document.getElementById('onboarding').style.display='flex'; }
+  startClock();
+  requestNotifPerm();
+  setupColorPicker();
+  renderAvatarGrid();
+  // unlock audio on first interaction
+  document.addEventListener('click',()=>{ if(window.AudioContext||window.webkitAudioContext){ if(!window._actx) window._actx=new(window.AudioContext||window.webkitAudioContext)(); if(window._actx.state==='suspended') window._actx.resume(); } },{once:true});
+});
+
+// ── NOTIFICATIONS ────────────────────────────────
+function requestNotifPerm(){
+  if(!('Notification' in window)) return;
+  if(Notification.permission==='default'){
+    Notification.requestPermission().then(p=>{
+      if(p==='granted'){ toast('✅ تم تفعيل الإشعارات'); playSound('success'); }
+    });
+  }
+}
+
+// ── SOUND ENGINE ────────────────────────────────
+function playTone(freq,dur,type='sine',vol=0.28,delay=0){
+  try{
+    if(!window._actx) window._actx=new(window.AudioContext||window.webkitAudioContext)();
+    const ctx=window._actx; if(ctx.state==='suspended') ctx.resume();
+    const t=ctx.currentTime+delay;
+    const osc=ctx.createOscillator(); const gain=ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type=type; osc.frequency.setValueAtTime(freq,t);
+    gain.gain.setValueAtTime(0,t);
+    gain.gain.linearRampToValueAtTime(vol,t+0.01);
+    gain.gain.exponentialRampToValueAtTime(0.001,t+dur);
+    osc.start(t); osc.stop(t+dur+0.05);
+  }catch(e){}
+}
+function playSound(type){
+  if(silentMode) return;
+  if(type==='success'){ playTone(523,.12,'sine',.25,0); playTone(659,.12,'sine',.25,.1); playTone(784,.22,'sine',.28,.2); }
+  else if(type==='delete'){ playTone(440,.1,'sine',.2,0); playTone(330,.18,'sine',.2,.1); }
+  else if(type==='done'){ playTone(659,.1,'sine',.2,0); playTone(784,.22,'sine',.22,.12); }
+  else if(type==='prayer'){ [440,495,528,495,440].forEach((f,i)=>playTone(f,.4,'sine',.18,i*.35)); }
+  else if(type==='reminder'){ playTone(880,.1,'sine',.3,0); playTone(880,.1,'sine',.3,.15); playTone(1047,.25,'sine',.3,.3); }
+  else if(type==='celebrate'){ [523,587,659,698,784,880,988,1047].forEach((f,i)=>playTone(f,.18,'sine',.22,i*.1)); setTimeout(()=>{ playTone(523,.5,'sine',.2); playTone(659,.5,'sine',.2); playTone(784,.5,'sine',.2); },900); }
+}
+function sendNotif(title,body,sound='reminder'){
+  playSound(sound);
+  toast(`🔔 ${title}${body?' — '+body:''}`,5000);
+  if(Notification.permission==='granted'){
+    try{ new Notification(title,{body,icon:'favicon.svg',dir:'rtl',lang:'ar'}); }catch(e){}
+  }
+}
+
+// ── THEME ────────────────────────────────────────
+function applyDark(){
+  document.body.classList.toggle('dark',isDark);
+  document.getElementById('dark-btn')?.setAttribute('title', isDark?'الوضع النهاري':'الوضع الليلي');
+}
+function toggleDark(){ isDark=!isDark; localStorage.setItem('ms_dark',isDark); applyDark(); }
+
+// ── LANG ────────────────────────────────────────
+function applyLang(){
+  const isEn = lang==='en';
+  document.documentElement.setAttribute('dir', isEn?'ltr':'rtl');
+  document.documentElement.setAttribute('lang', lang);
+  const lb = document.getElementById('lang-btn');
+  if(lb) lb.textContent = isEn?'AR':'EN';
+}
+function toggleLang(){ lang=lang==='ar'?'en':'ar'; localStorage.setItem('ms_lang',lang); applyLang(); }
+
+// ── CLOCK ────────────────────────────────────────
+function startClock(){
+  tick(); setInterval(tick,1000);
+  setInterval(checkPrayers,60000);
+  setInterval(checkReminders,60000);
+  fetchPrayerTimes();
+}
+function tick(){
+  const now=new Date();
+  const days=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const months=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  const h=now.getHours(), m=now.getMinutes(), s=now.getSeconds();
+  const ampm=h>=12?'م':'ص';
+  const hh=((h%12)||12).toString().padStart(2,'0');
+  const mm=m.toString().padStart(2,'0'), ss=s.toString().padStart(2,'0');
+  const dayName=days[now.getDay()];
+  const dayNum=now.getDate();
+  const monthName=months[now.getMonth()];
+  const year=now.getFullYear();
+  const el=id=>document.getElementById(id);
+  if(el('h-day')) el('h-day').textContent=`${dayName}، ${dayNum} ${monthName} ${year}`;
+  if(el('h-time')) el('h-time').textContent=`${hh}:${mm}:${ss} ${ampm}`;
+  try{
+    const hijri=now.toLocaleDateString('ar-SA-u-ca-islamic',{year:'numeric',month:'long',day:'numeric'});
+    if(el('h-hijri')) el('h-hijri').textContent=hijri;
+  }catch(e){}
+  // hero greeting
+  if(el('h-greet')){
+    el('h-greet').textContent=h<5?'طاب سهرك':h<12?'صباح الخير':h<17?'مساء الخير':h<21?'مساء النور':'طاب مساؤك';
+    el('h-emoji').textContent=h<5?'🌙':h<12?'☀️':h<17?'🌤️':h<21?'🌅':'🌙';
+  }
+  if(el('h-fac') && user?.faculty) el('h-fac').textContent=user.faculty+(user.dept?` · ${user.dept}`:'');
+  renderNextPrayer();
+}
+
+function fetchPrayerTimes(){
+  if(!navigator.geolocation) return;
+  navigator.geolocation.getCurrentPosition(pos=>{
+    const {latitude:lat,longitude:lon}=pos.coords;
+    const d=new Date(), dd=d.getDate(), mm=d.getMonth()+1, yy=d.getFullYear();
+    fetch(`https://api.aladhan.com/v1/timings/${dd}-${mm}-${yy}?latitude=${lat}&longitude=${lon}&method=5`)
+      .then(r=>r.json()).then(data=>{
+        if(data.code!==200) return;
+        const t=data.data.timings;
+        const p=s=>{const [h,m]=s.split(':').map(Number);return[h,m];};
+        prayerTimes={fajr:p(t.Fajr),dhuhr:p(t.Dhuhr),asr:p(t.Asr),maghrib:p(t.Maghrib),isha:p(t.Isha)};
+        localStorage.setItem('ms_prayers',JSON.stringify(prayerTimes));
+        renderPrayerCard();
+      }).catch(()=>loadSavedPrayers());
+  },()=>loadSavedPrayers(),{timeout:8000,maximumAge:3600000});
+}
+function loadSavedPrayers(){
+  const s=localStorage.getItem('ms_prayers');
+  if(s){ try{ Object.assign(prayerTimes,JSON.parse(s)); }catch(e){} }
+}
+
+function renderPrayerCard(){
+  const el=document.getElementById('prayer-rows'); if(!el) return;
+  const now=new Date(); const nowM=now.getHours()*60+now.getMinutes();
+  const nextP=getNextPrayer(nowM);
+  el.innerHTML=Object.entries(PRAYER_NAMES_AR).map(([k,name])=>{
+    const [h,m]=prayerTimes[k];
+    const timeStr=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+    const ampm=h>=12?'م':'ص';
+    const isNext=k===nextP;
+    return `<div class="pr-row">
+      <span class="pr-name">${name}</span>
+      <span class="pr-time ${isNext?'next':''}">${timeStr} ${ampm}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderNextPrayer(){
+  const el=document.getElementById('prayer-rows');
+  if(!el?.children.length) renderPrayerCard();
+}
+
+function getNextPrayer(nowMins){
+  const order=['fajr','dhuhr','asr','maghrib','isha'];
+  for(const p of order){
+    const [h,m]=prayerTimes[p];
+    if(h*60+m>nowMins) return p;
+  }
+  return 'fajr';
+}
+
+function checkPrayers(){
+  if(silentMode) return;
+  const now=new Date(); const nowM=now.getHours()*60+now.getMinutes();
+  Object.entries(prayerTimes).forEach(([k,[h,m]])=>{
+    if(h*60+m===nowM) sendNotif('وقت الصلاة',`حان وقت صلاة ${PRAYER_NAMES_AR[k]}`,'prayer');
+  });
+}
+
+function checkReminders(){
+  if(silentMode) return;
+  const now=new Date();
+  const nowDay=now.getDay(); const nowM=now.getHours()*60+now.getMinutes();
+  // lecture reminders (1 hour before)
+  schedules.forEach(s=>{
+    if(parseInt(s.day)!==nowDay) return;
+    if(!s.from) return;
+    const [fh,fm]=s.from.split(':').map(Number);
+    const lecM=fh*60+fm;
+    const remMins=parseInt(s.remindMins||0);
+    if(remMins && lecM-nowM===remMins){
+      sendNotif('تذكير محاضرة',`"${s.subject}" بعد ${remMins} دقيقة — ${s.place||''}`,'reminder');
+    }
+  });
+  // task reminders
+  const todayStr=now.toISOString().split('T')[0];
+  const hh=String(now.getHours()).padStart(2,'0'), mm2=String(now.getMinutes()).padStart(2,'0');
+  tasks.filter(t=>!t.done&&t.date===todayStr&&t.time===`${hh}:${mm2}`).forEach(t=>{
+    sendNotif(t.title,t.note||'','reminder');
+  });
+}
+
+// ── ONBOARDING ────────────────────────────────────
+let obStep=1;
+function obGo(n){
+  document.getElementById(`obs-${obStep}`)?.classList.remove('active');
+  document.querySelectorAll('.od')[obStep-1]?.classList.remove('active');
+  obStep=n;
+  document.getElementById(`obs-${obStep}`)?.classList.add('active');
+  document.querySelectorAll('.od')[obStep-1]?.classList.add('active');
+}
+function skipOb(){ user={name:'',faculty:'',dept:'',age:'',phone:'',addr:''}; save(); launchApp(); }
+function finishOb(){
+  user={
+    name:document.getElementById('o-name')?.value.trim()||'',
+    age:document.getElementById('o-age')?.value||'',
+    faculty:document.getElementById('o-fac')?.value.trim()||'',
+    dept:document.getElementById('o-dept')?.value.trim()||'',
+    phone:document.getElementById('o-phone')?.value.trim()||'',
+    addr:document.getElementById('o-addr')?.value.trim()||'',
+  };
+  save(); launchApp();
+}
+
+// autocomplete
+function acFac(v){
+  const list=document.getElementById('fac-list'); if(!list) return;
+  const items=v?FACULTIES.filter(f=>f.includes(v)):FACULTIES;
+  list.innerHTML=items.map(f=>`<div class="aci" onclick="pickFac('${f}')">${f}</div>`).join('');
+  list.classList.toggle('open',items.length>0);
+}
+function pickFac(v){
+  document.getElementById('o-fac').value=v;
+  document.getElementById('fac-list').classList.remove('open');
+  const depts=DEPTS[v]||DEPTS.default;
+  document.getElementById('dept-list').innerHTML=depts.map(d=>`<div class="aci" onclick="pickDept('${d}')">${d}</div>`).join('');
+  document.getElementById('dept-list').classList.add('open');
+}
+function acDept(v){
+  const fac=document.getElementById('o-fac')?.value||'';
+  const all=DEPTS[fac]||DEPTS.default;
+  const items=v?all.filter(d=>d.includes(v)):all;
+  const list=document.getElementById('dept-list'); if(!list) return;
+  list.innerHTML=items.map(d=>`<div class="aci" onclick="pickDept('${d}')">${d}</div>`).join('');
+  list.classList.toggle('open',items.length>0);
+}
+function pickDept(v){
+  document.getElementById('o-dept').value=v;
+  document.getElementById('dept-list').classList.remove('open');
+}
+document.addEventListener('click',e=>{ if(!e.target.closest('.acw')) document.querySelectorAll('.acl').forEach(l=>l.classList.remove('open')); });
+
+// ── LAUNCH APP ────────────────────────────────────
+function launchApp(){
+  document.getElementById('onboarding').style.display='none';
+  document.getElementById('app').style.display='flex';
+  updateUserUI();
+  renderHome(); renderSchedule(); renderTasks(); renderLinks();
+  renderPrayerCard();
+  setTimeout(requestNotifPerm,1200);
+}
+
+function updateUserUI(){
+  const name=user?.name||'';
+  const init=name?name.split(' ').map(w=>w[0]).slice(0,2).join(''):'م';
+  const photo=localStorage.getItem('ms_av_photo');
+  const av=selAvatar;
+  const setAv=(el)=>{
+    if(!el) return;
+    if(av==='__photo__'&&photo){ el.innerHTML=`<img src="${photo}" alt="av">`; }
+    else if(av&&av!=='__photo__'){ el.textContent=av; }
+    else { el.textContent=init; }
+  };
+  setAv(document.getElementById('sb-av'));
+  setAv(document.getElementById('tb-av'));
+  setAv(document.getElementById('pf-av'));
+  const un=document.getElementById('sb-uname'); if(un) un.textContent=name||'المستخدم';
+  const pts=document.getElementById('sb-pts'); if(pts) pts.textContent=points;
+  setTx('pf-name',name||'—');
+  setTx('pf-fac',user?.faculty||'—');
+  setTx('pf-dept',user?.dept||'—');
+  setTx('pf-age',user?.age?user.age+' سنة':'—');
+  setTx('pf-phone',user?.phone||'—');
+  if(document.getElementById('pc-num')) document.getElementById('pc-num').textContent=points;
+}
+function setTx(id,v){ const el=document.getElementById(id); if(el) el.textContent=v; }
+
+// ── HOME ─────────────────────────────────────────
+function renderHome(){
+  renderTodayLectures();
+  renderTodayTasks();
+}
+function renderTodayLectures(){
+  const el=document.getElementById('home-lecs'); if(!el) return;
+  const today=new Date().getDay();
+  const today_lecs=schedules.filter(s=>parseInt(s.day)===today).sort((a,b)=>a.from?.localeCompare(b.from));
+  if(!today_lecs.length){
+    el.innerHTML=`<div class="empty-lec"><div class="ei">📅</div><p>لا توجد محاضرات اليوم</p></div>`;
+    return;
+  }
+  el.innerHTML=today_lecs.map(s=>lecCardHTML(s,true)).join('');
+}
+function renderTodayTasks(){
+  const el=document.getElementById('home-tasks'); if(!el) return;
+  const todayStr=new Date().toISOString().split('T')[0];
+  const urgent=tasks.filter(t=>!t.done&&(t.date===todayStr||t.priority==='high')).slice(0,5);
+  if(!urgent.length){
+    el.innerHTML=`<div class="empty-lec"><p>لا يوجد مهام حالياً. أنت رائع! ✨</p></div>`;
+    return;
+  }
+  el.innerHTML=urgent.map(taskCardHTML).join('');
+}
+
+// ── SCHEDULE ─────────────────────────────────────
+function renderSchedule(){
+  buildDayTabs();
+  renderLectures();
+}
+function buildDayTabs(){
+  const el=document.getElementById('day-tabs'); if(!el) return;
+  const tabs=[{v:-1,l:'الكل'},...DAYS.slice(0,5).map((d,i)=>({v:i,l:d}))];
+  el.innerHTML=tabs.map(t=>`<button class="dt ${t.v===selDay?'active':''}" onclick="setDay(${t.v})">${t.l}</button>`).join('');
+}
+function setDay(d){ selDay=d; buildDayTabs(); renderLectures(); }
+
+function renderLectures(){
+  const el=document.getElementById('lec-list'); if(!el) return;
+  const filtered=selDay===-1?schedules:schedules.filter(s=>parseInt(s.day)===selDay);
+  if(!filtered.length){
+    el.innerHTML=`<div class="empty-lec"><div class="ei">📚</div><p>لا توجد محاضرات</p></div>`;
+    return;
+  }
+  // group by day
+  const groups={};
+  filtered.forEach(s=>{
+    const d=parseInt(s.day);
+    if(!groups[d]) groups[d]=[];
+    groups[d].push(s);
+  });
+  el.innerHTML=Object.entries(groups).sort((a,b)=>a[0]-b[0]).map(([d,lecs])=>`
+    <div class="day-group">
+      <div class="day-group-title">${DAYS[parseInt(d)]||'—'}</div>
+      ${lecs.sort((a,b)=>a.from?.localeCompare(b.from)).map(s=>lecCardHTML(s)).join('')}
+    </div>`).join('');
+}
+
+function lecCardHTML(s,compact=false){
+  return `<div class="lec-card" style="--lc:${s.color||'#0d9e6e'}">
+    <style>.lec-card{}</style>
+    <div class="lec-time-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      ${s.from||'--:--'}
+    </div>
+    <div class="lec-info">
+      <div class="lec-subj">${s.subject||'—'}</div>
+      <div class="lec-meta">${s.doctor?s.doctor+' · ':''}${s.place||''}</div>
+    </div>
+    ${!compact?`<button class="lec-del" onclick="delLec('${s.id}')">✕</button>`:''}
+  </div>`;
+}
+
+function delLec(id){
+  schedules=schedules.filter(s=>s.id!==id);
+  save(); renderSchedule(); renderHome();
+  toast('🗑️ تم الحذف'); playSound('delete');
+}
+
+// ── ADD LECTURE ───────────────────────────────────
+function openML(){ om('m-lec'); }
+function saveLec(){
+  const subj=document.getElementById('l-subj')?.value.trim();
+  const from=document.getElementById('l-from')?.value;
+  if(!subj||!from){ toast('⚠️ أدخل اسم المادة والوقت'); return; }
+  schedules.push({
+    id:genId(), type:'lecture',
+    subject:subj,
+    doctor:document.getElementById('l-doc')?.value.trim()||'',
+    day:document.getElementById('l-day')?.value||'0',
+    from, to:document.getElementById('l-to')?.value||'',
+    place:document.getElementById('l-place')?.value.trim()||'',
+    building:document.getElementById('l-bldg')?.value.trim()||'',
+    remindMins:document.getElementById('l-remind')?.value||'',
+    note:document.getElementById('l-note')?.value.trim()||'',
+    color:selLecColor,
+  });
+  save(); cm('m-lec');
+  clearFG(['l-subj','l-doc','l-from','l-to','l-place','l-bldg','l-note']);
+  renderSchedule(); renderHome();
+  toast('✅ تم الحفظ'); playSound('success');
+  points+=2; localStorage.setItem('ms_points',points); updateUserUI();
+}
+
+// ── BULK ─────────────────────────────────────────
+function openBulk(){ bulkDay=0; bulkRowN=0; document.getElementById('bulk-rows').innerHTML=''; document.querySelectorAll('.bt').forEach((b,i)=>b.classList.toggle('active',i===0)); addBR(); addBR(); addBR(); om('m-bulk'); }
+function selBD(d){ bulkDay=d; document.querySelectorAll('.bt').forEach(b=>b.classList.toggle('active',parseInt(b.dataset.d)===d)); }
+function addBR(){
+  const id=++bulkRowN;
+  const row=document.createElement('div'); row.className='bulk-row'; row.id=`br-${id}`;
+  row.innerHTML=`<input id="brs-${id}" type="text" placeholder="المادة"><input id="brd-${id}" type="text" placeholder="الدكتور"><input id="brf-${id}" type="time"><input id="brt-${id}" type="time"><button class="brd" onclick="delBR(${id})">✕</button>`;
+  document.getElementById('bulk-rows').appendChild(row);
+}
+function delBR(id){ document.getElementById(`br-${id}`)?.remove(); }
+function saveBulk(){
+  let added=0;
+  document.querySelectorAll('.bulk-row').forEach(row=>{
+    const rid=row.id.replace('br-','');
+    const subj=document.getElementById(`brs-${rid}`)?.value.trim();
+    const from=document.getElementById(`brf-${rid}`)?.value;
+    if(!subj||!from) return;
+    schedules.push({id:genId(),type:'lecture',subject:subj,doctor:document.getElementById(`brd-${rid}`)?.value.trim()||'',day:String(bulkDay),from,to:document.getElementById(`brt-${rid}`)?.value||'',place:'',building:'',color:'#0d9e6e',remindMins:''});
+    added++;
+  });
+  if(!added){ toast('⚠️ لم يتم إدخال أي محاضرة'); return; }
+  save(); cm('m-bulk');
+  renderSchedule(); renderHome();
+  toast(`✅ تم حفظ ${added} محاضرة`); playSound('success');
+  points+=added; localStorage.setItem('ms_points',points); updateUserUI();
+}
+
+// ── TASKS ─────────────────────────────────────────
+function openMT(){ const d=new Date(); document.getElementById('t-date').value=d.toISOString().split('T')[0]; om('m-task'); }
+function saveTask(){
+  const title=document.getElementById('t-title')?.value.trim();
+  if(!title){ toast('⚠️ أدخل عنوان المهمة'); return; }
+  tasks.push({id:genId(),title,subject:document.getElementById('t-subj')?.value.trim()||'',date:document.getElementById('t-date')?.value||'',time:document.getElementById('t-time')?.value||'',priority:document.getElementById('t-prio')?.value||'medium',note:document.getElementById('t-note')?.value.trim()||'',done:false});
+  save(); cm('m-task');
+  clearFG(['t-title','t-subj','t-date','t-time','t-note']);
+  renderTasks(); renderHome();
+  toast('✅ تم الحفظ'); playSound('success');
+}
+function filterT(f,btn){ taskFilter=f; document.querySelectorAll('.tf').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); renderTasks(); }
+function renderTasks(){
+  const el=document.getElementById('task-list'); if(!el) return;
+  let list=[...tasks];
+  if(taskFilter==='pending') list=list.filter(t=>!t.done);
+  else if(taskFilter==='done') list=list.filter(t=>t.done);
+  else if(taskFilter==='high') list=list.filter(t=>t.priority==='high'&&!t.done);
+  list.sort((a,b)=>{const p={high:0,medium:1,low:2}; return(p[a.priority]||1)-(p[b.priority]||1);});
+  if(!list.length){ el.innerHTML=`<div class="empty-lec"><div class="ei">✅</div><p>لا توجد مهام هنا</p></div>`; return; }
+  el.innerHTML=list.map(taskCardHTML).join('');
+}
+function taskCardHTML(t){
+  const pl={high:'عالية 🔴',medium:'متوسطة 🟡',low:'منخفضة 🟢'};
+  return `<div class="task-card ${t.priority} ${t.done?'task-done':''}">
+    <div class="task-check ${t.done?'done':''}" onclick="toggleTask('${t.id}')"></div>
+    <div class="task-body">
+      <div class="task-title">${t.title}</div>
+      <div class="task-meta">
+        ${t.subject?`📚 ${t.subject} · `:''}
+        ${t.date?`📅 ${t.date} `:''}
+        <span class="prio-badge ${t.priority}">${pl[t.priority]}</span>
+      </div>
+      ${t.note?`<div style="font-size:.75rem;color:var(--text2);margin-top:3px;font-style:italic">${t.note}</div>`:''}
+    </div>
+    <button class="task-del" onclick="delTask('${t.id}')">✕</button>
+  </div>`;
+}
+function toggleTask(id){
+  const t=tasks.find(x=>x.id===id);
+  if(t){ t.done=!t.done; if(t.done){ playSound('done'); points+=1; localStorage.setItem('ms_points',points); } save(); renderTasks(); renderHome(); updateUserUI(); }
+}
+function delTask(id){ tasks=tasks.filter(t=>t.id!==id); save(); renderTasks(); renderHome(); toast('🗑️ تم الحذف'); playSound('delete'); }
+
+// ── LINKS ─────────────────────────────────────────
+function openMLnk(){ om('m-lnk'); }
+function saveLnk(){
+  const name=document.getElementById('lnk-name')?.value.trim();
+  const url=document.getElementById('lnk-url')?.value.trim();
+  if(!name||!url){ toast('⚠️ أدخل الاسم والرابط'); return; }
+  links.push({id:genId(),name,url});
+  save(); cm('m-lnk');
+  clearFG(['lnk-name','lnk-url']);
+  renderLinks();
+  toast('✅ تم الحفظ'); playSound('success');
+}
+function renderLinks(){
+  const el=document.getElementById('links-grid'); if(!el) return;
+  if(!links.length){ el.innerHTML=`<div class="empty-lec" style="grid-column:1/-1"><div class="ei">🔗</div><p>لا توجد روابط</p></div>`; return; }
+  el.innerHTML=links.map(l=>{
+    let icon='🌐';
+    if(l.url.includes('instagram')) icon='📸';
+    else if(l.url.includes('facebook')) icon='👍';
+    else if(l.url.includes('youtube')) icon='▶️';
+    else if(l.url.includes('google')) icon='🔍';
+    return `<a class="link-card" href="${l.url}" target="_blank">
+      <button class="lnk-del" onclick="event.preventDefault();delLnk('${l.id}')">✕</button>
+      <span class="link-icon">${icon}</span>
+      <span class="link-name">${l.name}</span>
+    </a>`;
+  }).join('');
+}
+function delLnk(id){ links=links.filter(l=>l.id!==id); save(); renderLinks(); toast('🗑️ تم الحذف'); playSound('delete'); }
+
+// ── PROFILE ──────────────────────────────────────
+function openEditProfile(){
+  document.getElementById('ep-name').value=user?.name||'';
+  document.getElementById('ep-fac').value=user?.faculty||'';
+  document.getElementById('ep-dept').value=user?.dept||'';
+  document.getElementById('ep-phone').value=user?.phone||'';
+  om('m-edit-profile');
+}
+function saveProfile(){
+  user.name=document.getElementById('ep-name').value.trim()||user.name;
+  user.faculty=document.getElementById('ep-fac').value.trim()||user.faculty;
+  user.dept=document.getElementById('ep-dept').value.trim()||user.dept;
+  user.phone=document.getElementById('ep-phone').value.trim()||user.phone;
+  save(); cm('m-edit-profile'); updateUserUI();
+  toast('✅ تم التحديث'); playSound('success');
+}
+
+// ── AVATAR ────────────────────────────────────────
+function renderAvatarGrid(){
+  const el=document.getElementById('av-grid'); if(!el) return;
+  el.innerHTML=AVATARS.map(a=>`<div class="av-opt ${selAvatar===a?'sel':''}" onclick="pickAv('${a}')">${a}</div>`).join('');
+}
+function openMAv(){ renderAvatarGrid(); om('m-av'); }
+function pickAv(a){
+  selAvatar=a; localStorage.setItem('ms_avatar',a);
+  document.querySelectorAll('.av-opt').forEach(el=>el.classList.toggle('sel',el.textContent===a));
+  updateUserUI(); cm('m-av'); toast('✅ تم تحديث الصورة'); playSound('success');
+}
+function upAv(input){
+  const file=input.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    localStorage.setItem('ms_av_photo',e.target.result);
+    selAvatar='__photo__'; localStorage.setItem('ms_avatar','__photo__');
+    updateUserUI(); cm('m-av'); toast('✅ تم تحديث الصورة'); playSound('success');
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── DATA EXPORT/IMPORT ────────────────────────────
+function exportData(){
+  const data={version:'3.0',exportDate:new Date().toISOString(),user,schedules,tasks,links};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='masar-backup.json'; a.click();
+  URL.revokeObjectURL(url); toast('✅ تم التصدير'); playSound('success');
+}
+function importData(file){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const d=JSON.parse(e.target.result);
+      if(d.user) user=d.user;
+      if(d.schedules) schedules=d.schedules;
+      if(d.tasks) tasks=d.tasks;
+      if(d.links) links=d.links;
+      save(); updateUserUI(); renderHome(); renderSchedule(); renderTasks(); renderLinks();
+      toast('✅ تم الاستيراد'); playSound('success');
+    }catch(err){ toast('❌ الملف غير صالح'); }
+  };
+  reader.readAsText(file);
+}
+
+// ── NAVIGATION ────────────────────────────────────
+function gp(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(`pg-${name}`)?.classList.add('active');
+  document.querySelectorAll('.sn').forEach(n=>n.classList.remove('active'));
+  document.getElementById(`sn-${name}`)?.classList.add('active');
+  closeSidebar();
+  if(name==='home') renderHome();
+  if(name==='schedule') renderSchedule();
+  if(name==='tasks') renderTasks();
+  if(name==='links') renderLinks();
+}
+
+function openSidebar(){ document.getElementById('sidebar')?.classList.add('open'); document.getElementById('sb-overlay')?.classList.add('show'); }
+function closeSidebar(){ document.getElementById('sidebar')?.classList.remove('open'); document.getElementById('sb-overlay')?.classList.remove('show'); }
+function toggleSidebar(){ document.getElementById('sidebar')?.classList.contains('open')?closeSidebar():openSidebar(); }
+
+// ── SILENT MODE ───────────────────────────────────
+function toggleSilent(){
+  silentMode=!silentMode; localStorage.setItem('ms_silent',silentMode);
+  const btn=document.getElementById('silent-btn');
+  if(btn) btn.style.opacity=silentMode?'0.4':'1';
+  toast(silentMode?'🔕 وضع الصمت مفعّل':'🔔 الإشعارات مفعّلة');
+}
+
+// ── COLOR PICKER ──────────────────────────────────
+function setupColorPicker(){
+  document.querySelectorAll('.cpick').forEach(pick=>{
+    pick.querySelectorAll('.cp').forEach(cp=>{
+      cp.addEventListener('click',()=>{
+        pick.querySelectorAll('.cp').forEach(c=>c.classList.remove('sel'));
+        cp.classList.add('sel');
+        if(pick.id==='lc-pick') selLecColor=cp.dataset.c;
+      });
+    });
+  });
+}
+
+// ── MODALS ────────────────────────────────────────
+function om(id){ document.getElementById(id)?.classList.add('open'); }
+function cm(id){ document.getElementById(id)?.classList.remove('open'); }
+document.querySelectorAll('.mov').forEach(ov=>ov.addEventListener('click',e=>{ if(e.target===ov) ov.classList.remove('open'); }));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.mov.open').forEach(m=>m.classList.remove('open')); });
+
+// ── TOAST ─────────────────────────────────────────
+let toastT;
+function toast(msg,dur=3000){
+  const el=document.getElementById('toast'); if(!el) return;
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('show'),dur);
+}
+
+// ── HELPERS ───────────────────────────────────────
+function genId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+function clearFG(ids){ ids.forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; }); }
+
+</script>
+</body>
+</html>
